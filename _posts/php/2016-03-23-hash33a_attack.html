@@ -1,0 +1,40 @@
+define("A", ord("A"));
+define("z", ord("z"));
+
+
+function rebuild_key($hash) {
+    for ($c = A; $c <= z; $c ++) {
+        $TMPHASH = $hash - $c;
+        if ($TMPHASH == 0) {
+            return chr($c);
+
+        } elseif ($TMPHASH < 0) {
+            continue;
+
+        } else {
+            $TMPHASH /= 33;
+            $NEWHASH = intval($TMPHASH);
+
+            if ($NEWHASH != $TMPHASH) {
+                continue;
+            } else {
+                if ($key = rebuild_key($NEWHASH)) {
+                    return $key . chr($c);
+                }
+            }
+        }
+    }
+    return false;
+}
+
+function decode($hashrange, $BASE = 3)
+{
+    $keys = array();
+    for ( ; $hashrange > 0 ; $hashrange --) {
+        $HASH = $BASE * $hashrange;
+        if ($key = rebuild_key($HASH)) {
+            $keys[] = $key;
+        }
+    }
+    return $keys;
+}
