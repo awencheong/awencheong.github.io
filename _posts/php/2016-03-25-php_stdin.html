@@ -20,3 +20,22 @@
 <p>使用: awk -F ',' '{print $1}' ./abc.txt | xargs php abc1.php 却得不到输出；</p>
 <p>使用: awk -F ',' '{print $1}' ./abc.txt | php abc1.php 输出全部；</p>
 <p>why?</p>
+
+<p></p>
+<p></p>
+
+<p>执行这个，则能得到一个优雅的“逐行处理”程序：</p>
+<p></p>
+<p>abc.php</p>
+<p><?php</p>
+<p>$tag = $argv[1];</p>
+<p>$fp = fopen("php://stdin", "r");
+<p>while (!feof($fp)) {</p>
+<p>    if (!$line = trim(fgets($fp))) {</p>
+<p>        continue;</p>
+<p>    }</p>
+<p>    echo "[$tag] $line \n";</p>
+<p>}</p>
+<p>fclose($fp);</p>
+
+<p>命令: awk -F ',' '{print $1}' ./abc.txt |  php abc.php "awen" | php abc.php "kimi" </p>
