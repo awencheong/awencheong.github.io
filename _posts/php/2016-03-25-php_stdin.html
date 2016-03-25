@@ -1,0 +1,20 @@
+<p>abc.txt:</p>
+<p>111, 2223,  4</p>
+<p>111, 2223,  4</p>
+<p></p>
+<p>abc.php</p>
+<p><?php</p></p>
+<p>print_r($argv[1]);</p>
+<p>?></p>
+
+<p></p>
+<p>abc1.php</p>
+<p><?php</p></p>
+<p>print_r(file_get_contents("php://stdin");</p>
+<p>?></p>
+
+
+<p></p>
+<p>使用: awk -F ',' '{print $1}' ./abc.txt | xargs php abc.php 只输出1行;</p>
+<p>使用: awk -F ',' '{print $1}' ./abc.txt | php abc1.php 输出全部；</p>
+<p>why?</p>
